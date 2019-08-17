@@ -72,6 +72,7 @@ const App = () => {
     return (
         <div>
             <input type="file" multiple={true} accept="image/gif, image/jpeg, image/jpg, image/png" onChange={onFileChange}></input>
+            <p>点击查看地址</p>
             <ul className="results">
                 {
                     results.map((item, index) => {
@@ -79,7 +80,7 @@ const App = () => {
                             <li key={index} onClick={()=>{
                                 alert(item.content)
                             }}>
-                                <img alt={item.url} style={{ width: '20%' }} src={item.url} />
+                                <img alt={item.url} src={item.url} />
                             </li>
                         )
                     })
