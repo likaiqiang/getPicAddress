@@ -21,7 +21,6 @@ const App = () => {
                 !(function(i){
                     loadImage(files[i], function (img, data) {
                         if (data.exif) {
-                            debugger
                             let { GPSLongitude, GPSLatitude } = data.exif.getAll()
                             if (GPSLongitude) {
                                 let GPSInfo = dealGps(GPSLongitude, GPSLatitude)
@@ -29,7 +28,6 @@ const App = () => {
                                 GPSLongitude = GPSInfo.GPSLongitude
                                 GPSLatitude = GPSInfo.GPSLatitude
                                 axios.get(`https://restapi.amap.com/v3/geocode/regeo?location=${GPSLongitude},${GPSLatitude}&key=22b746e8df0bdad6793499fea7d5bf25&output=JSON`).then(res=>{
-                                    debugger
                                     newResults[i].content = res.data.regeocode.formatted_address
                                     changeResults(newResults)
                                 })
