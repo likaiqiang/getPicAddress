@@ -19,3 +19,55 @@ img{
 .results li img{
     width:100%;
 }
+
+
+
+::-webkit-details-marker {
+    display: none;
+  }
+  ::-moz-list-bullet {
+    font-size: 0;
+    float: left;
+  }
+  details {
+    font-size: 15px;
+  }
+  details summary {
+    position: relative;
+    user-select: none;
+    outline: 0;
+  }
+  details + dl {
+    font-size: 14px;
+    max-height: 0;
+    transition: max-height 0.25s;
+    padding-left: 1.5em;
+    overflow: hidden;
+    color: #b7bac3;
+  }
+
+  details + dl dd{
+    margin-top: 15px;
+  }
+  [open] + dl{
+      max-height: 1000px;
+  }
+
+.page{
+  display: flex;
+}
+.page .menu{
+  width:200px;
+}
+.page .content{
+  flex:1;
+}
+.distanceRes{
+  overflow: hidden;
+}
+.distanceRes .kwResult li >div{
+  display: inline-block;
+}
+.distanceRes .kwResult, .distanceRes .rangeResult{
+  float: left;
+}
