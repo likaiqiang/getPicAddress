@@ -10,12 +10,7 @@ const App = () => {
     const onFileChange = (e) => {
         let files = e.target.files
         let newResults = []
-        for (let k = 0; k < files.length; k++) {
-            newResults.push({
-                url: '',
-                content: ''
-            })
-        }
+       
         if (files) {
             for (let i = 0; i < files.length; i++) {
                 !(function(i){
@@ -28,24 +23,20 @@ const App = () => {
                                 GPSLongitude = GPSInfo.GPSLongitude
                                 GPSLatitude = GPSInfo.GPSLatitude
                                 axios.get(`https://restapi.amap.com/v3/geocode/regeo?location=${GPSLongitude},${GPSLatitude}&key=22b746e8df0bdad6793499fea7d5bf25&output=JSON`).then(res=>{
-                                    newResults[i].content = res.data.regeocode.formatted_address
+                                   
+                                    newResults = [...newResults,{
+                                        url: URL.createObjectURL(files[i]),
+                                        name: files[i].name,
+                                        content: res.data.regeocode.formatted_address
+                                    }]
+                           
                                     changeResults(newResults)
                                 })
                             }
-                            else {
-                                newResults[i].content = 'no gps data'
-                                changeResults(newResults)
-                            }
-                        }
-                        else {
-                            newResults[i].content = 'no exif data'
-                            changeResults(newResults)
+                            
                         }
     
                     }, { meta: true })
-                    let url = URL.createObjectURL(files[i])
-                    newResults[i].url = url
-                    changeResults(newResults)
                 })(i)
             }
             
@@ -69,16 +60,22 @@ const App = () => {
             GPSLatitude
         }
     }
+    const viewAddress = ()=>{
+        let validAddress = results.map(item=>{
+            return `${item.name}:  ${item.content}`
+        }).join('\n')
+        alert(validAddress)
+    }
     return (
         <div>
             <input type="file" multiple={true} accept="image/gif, image/jpeg, image/jpg, image/png" onChange={onFileChange}></input>
-            <p>点击查看地址</p>
+            <button onClick={viewAddress}>点击查看地址</button>
             <ul className="results">
                 {
                     results.map((item, index) => {
                         return (
                             <li key={index} onClick={()=>{
-                                alert(item.content)
+                                alert(`${item.name}: ${item.content}`)
                             }}>
                                 <img alt={item.url} src={item.url} />
                             </li>
