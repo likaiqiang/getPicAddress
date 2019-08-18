@@ -107,6 +107,7 @@ export default (props) => {
                                                         <option value="酒店">酒店</option>
                                                         <option value="大学">大学</option>
                                                         <option value="小区">小区</option>
+                                                        <option value="公园">公园</option>
                                                     </select>
                                                     <select value={curDistance} onChange={(e) => {
                                                         changeCurDis(e.target.value)
