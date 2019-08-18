@@ -10,12 +10,12 @@ const App = () => {
     const onFileChange = (e) => {
         let files = e.target.files
         let newResults = []
-       
         if (files) {
+            changeResults(newResults)
             for (let i = 0; i < files.length; i++) {
                 !(function(i){
                     loadImage(files[i], function (img, data) {
-                        if (data.exif) {
+                        if (data && data.exif) {
                             let { GPSLongitude, GPSLatitude } = data.exif.getAll()
                             if (GPSLongitude) {
                                 let GPSInfo = dealGps(GPSLongitude, GPSLatitude)
